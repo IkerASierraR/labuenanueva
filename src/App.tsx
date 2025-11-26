@@ -78,7 +78,7 @@ function App() {
       updateWindowControls({
         resizable: false,
         maximizable: false,
-        size: { width: 520, height: 900 },
+        size: { width: 416, height: 720 },
       });
     }
   }, [qrRoute, session]);
