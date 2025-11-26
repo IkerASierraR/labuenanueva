@@ -266,12 +266,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
         </div>
 
         <div className="admin-sidebar-nav-wrapper">
-          <div className="admin-nav-header">
-            <p className="admin-nav-title-text">Gestiones del panel</p>
-            <p className="admin-nav-subtitle-text">
-              Accede a los apartados de administracion
-            </p>
-          </div>
 
           <nav className="admin-nav">
             {NAV_GROUPS.map((group) => {
