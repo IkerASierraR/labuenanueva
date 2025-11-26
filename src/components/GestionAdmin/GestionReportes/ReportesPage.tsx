@@ -95,7 +95,7 @@ export const GestionReportes: React.FC<ReportesEstadisticasProps> = ({ onAuditLo
       <div className="gestion-reportes-header">
         <div>
           <p className="gestion-reportes-status">Conectado a reportes-backend (puerto 8089)</p>
-          <h2 className="gestion-reportes-title">Reportes y Estadísticas</h2>
+          <h2 className="gestion-reportes-title">Reportes y estadísticas</h2>
           <p className="gestion-reportes-subtitle">
             Análisis y métricas del sistema con sincronización en tiempo real.
           </p>

@@ -197,10 +197,10 @@ export const GestionAuditoria: React.FC<GestionAuditoriaProps> = ({ onAuditLog }
     <div className="gestion-auditoria">
       <div className="gestion-auditoria-header">
         <div>
-          <h2 className="gestion-auditoria-title">Gestion de Auditoria de Reservas</h2>
+          <h2 className="gestion-auditoria-title">Gestión de auditoría de reservas</h2>
           <p className="gestion-auditoria-subtitle">
-            Consulta los cambios de estado realizados sobre las reservas y detecta anomalias
-            rapidamente.
+            Consulta los cambios de estado realizados sobre las reservas y detecta anomalías
+            rápidamente.
           </p>
         </div>
         <div className="gestion-auditoria-actions">

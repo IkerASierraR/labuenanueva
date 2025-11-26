@@ -163,9 +163,9 @@ export const GestionEspacios: React.FC<GestionEspaciosProps> = ({ onAuditLog }) 
     <div className="gestion-espacios">
       <div className="gestion-espacios-header">
         <div>
-          <h2 className="gestion-espacios-title">Gestion de Espacios</h2>
+          <h2 className="gestion-espacios-title">Gestión de espacios</h2>
           <p className="gestion-espacios-subtitle">
-            Administra los ambientes academicos y sincroniza los cambios en tiempo real.
+            Administra los ambientes académicos y sincroniza los cambios en tiempo real.
           </p>
         </div>
         <div className="gestion-espacios-actions">

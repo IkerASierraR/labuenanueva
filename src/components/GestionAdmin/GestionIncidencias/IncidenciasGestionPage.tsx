@@ -245,9 +245,9 @@ export const GestionIncidencias: React.FC<GestionIncidenciasProps> = ({
     <div className="gestion-incidencias">
       <div className="gestion-incidencias-header">
         <div>
-          <h2 className="gestion-incidencias-title">Gestion de incidencias</h2>
+          <h2 className="gestion-incidencias-title">Gestión de incidencias</h2>
           <p className="gestion-incidencias-subtitle">
-            Visualiza y filtra los reportes registrados por los usuarios segun tu rol.
+            Visualiza y filtra los reportes registrados por los usuarios según tu rol.
           </p>
         </div>
         <button

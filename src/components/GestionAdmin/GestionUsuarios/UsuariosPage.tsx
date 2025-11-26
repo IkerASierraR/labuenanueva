@@ -259,8 +259,8 @@ export const GestionUsuarios: React.FC<UsuariosPageProps> = ({ onAuditLog }) => 
     <div className="usuarios-page">
       <header className="usuarios-header">
         <div>
-          <h2>Gestion de Usuarios</h2>
-          <p>Administra estudiantes, docentes y personal administrativo desde un unico lugar.</p>
+          <h2>Gestión de usuarios</h2>
+          <p>Administra estudiantes, docentes y personal administrativo desde un único lugar.</p>
         </div>
         <button type="button" className="usuarios-new-button" onClick={openCreateModal}>
           <UserPlus size={16} />

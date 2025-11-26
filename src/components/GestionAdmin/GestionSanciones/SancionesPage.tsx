@@ -431,7 +431,7 @@ useEffect(() => {
     <section className="gestion-sanciones">
       <header className="gestion-sanciones-header">
         <div>
-          <h2 className="gestion-sanciones-title">Gestion de Sanciones</h2>
+          <h2 className="gestion-sanciones-title">Gestión de sanciones</h2>
           <p className="gestion-sanciones-subtitle">
             Controla las sanciones activas y su historial sincronizado con sanciones-backend.
           </p>

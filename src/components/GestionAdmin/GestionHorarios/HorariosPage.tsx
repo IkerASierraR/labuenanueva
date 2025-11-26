@@ -156,9 +156,9 @@ export const GestionHorarios: React.FC = () => {
     <div className="gestion-horarios">
       <div className="gestion-horarios-header">
         <div>
-          <h2 className="gestion-horarios-title">Gestion de Horarios Fijos</h2>
+          <h2 className="gestion-horarios-title">Gestión de horarios fijos</h2>
           <p className="gestion-horarios-subtitle">
-            Administra los cursos asignados a docentes y espacios con sincronizacion directa al
+            Administra los cursos asignados a docentes y espacios con sincronización directa al
             horariocurso-backend.
           </p>
         </div>
