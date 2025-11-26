@@ -256,6 +256,77 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
         isSidebarCollapsed ? "is-sidebar-collapsed" : ""
       }`}
     >
+            <header className="admin-header">
+        <div className="admin-header-left">
+          <button
+            type="button"
+            className={`admin-sidebar-toggle ${
+              isSidebarCollapsed ? "is-collapsed" : ""
+            }`}
+            onClick={() => setIsSidebarCollapsed((prev) => !prev)}
+            aria-pressed={isSidebarCollapsed}
+            aria-label="Alternar menu lateral"
+          >
+            <span className="admin-sidebar-toggle-icon">
+              <span />
+              <span />
+            </span>
+          </button>
+          <div className="admin-header-text">
+            <p className="admin-kicker">Panel principal</p>
+            <p className="admin-header-helper">IntegraUPT - Sistema de Gestion</p>
+          </div>
+        </div>
+
+        <div className="admin-header-right" ref={profileRef}>
+          <button
+            type="button"
+            className={`admin-profile-trigger ${
+              isProfileOpen ? "is-open" : ""
+            }`}
+            onClick={() => setIsProfileOpen((prev) => !prev)}
+            aria-expanded={isProfileOpen}
+            aria-haspopup="true"
+          >
+            <div className="admin-user-info">
+              <p className="admin-user-name">{user.user_metadata.name}</p>
+              <p className="admin-user-role">
+                {user.user_metadata.role ?? "Administrador del Sistema"}
+              </p>
+            </div>
+            <div className="admin-user-avatar">
+              <span className="admin-avatar-text">{userInitial}</span>
+            </div>
+          </button>
+
+          {isProfileOpen && (
+            <div className="admin-profile-card" role="dialog" aria-label="Perfil">
+              <div className="admin-profile-row">
+                <span className="admin-profile-label">Nombre</span>
+                <span className="admin-profile-value">
+                  {user.user_metadata.name || user.email}
+                </span>
+              </div>
+              <div className="admin-profile-row">
+                <span className="admin-profile-label">Rol</span>
+                <span className="admin-profile-value">
+                  {user.user_metadata.role ?? "Administrador del Sistema"}
+                </span>
+              </div>
+              <button
+                type="button"
+                className="admin-profile-logout"
+                onClick={handleLogout}
+                disabled={isLoggingOut}
+              >
+                <LogOut className="admin-profile-logout-icon" />
+                {isLoggingOut ? "Cerrando..." : "Cerrar Sesion"}
+              </button>
+            </div>
+          )}
+        </div>
+      </header>
+
       <aside
         className={`admin-sidebar ${isSidebarCollapsed ? "is-collapsed" : ""}`}
       >
@@ -328,78 +399,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
       </aside>
 
       <div className="admin-main-stack">
-        <header className="admin-header">
-          <div className="admin-header-left">
-            <p className="admin-kicker">Panel principal</p>
-            <button
-              type="button"
-              className={`admin-sidebar-toggle ${
-                isSidebarCollapsed ? "is-collapsed" : ""
-              }`}
-              onClick={() => setIsSidebarCollapsed((prev) => !prev)}
-              aria-pressed={isSidebarCollapsed}
-              aria-label="Alternar menu lateral"
-            >
-              <span className="admin-sidebar-toggle-icon">
-                <span />
-                <span />
-              </span>
-            </button>
-            <div>
-              <p className="admin-kicker">Panel principal</p>
-              <p className="admin-header-helper">IntegraUPT - Sistema de Gestion</p>
-            </div>
-          </div>
-
-         <div className="admin-header-right" ref={profileRef}>
-            <button
-              type="button"
-              className={`admin-profile-trigger ${
-                isProfileOpen ? "is-open" : ""
-              }`}
-              onClick={() => setIsProfileOpen((prev) => !prev)}
-              aria-expanded={isProfileOpen}
-              aria-haspopup="true"
-            >
-              <div className="admin-user-info">
-                <p className="admin-user-name">{user.user_metadata.name}</p>
-                <p className="admin-user-role">
-                  {user.user_metadata.role ?? "Administrador del Sistema"}
-                </p>
-              </div>
-              <div className="admin-user-avatar">
-                <span className="admin-avatar-text">{userInitial}</span>
-              </div>
-            </button>
-
-            {isProfileOpen && (
-              <div className="admin-profile-card" role="dialog" aria-label="Perfil">
-                <div className="admin-profile-row">
-                  <span className="admin-profile-label">Nombre</span>
-                  <span className="admin-profile-value">
-                    {user.user_metadata.name || user.email}
-                  </span>
-                </div>
-                <div className="admin-profile-row">
-                  <span className="admin-profile-label">Rol</span>
-                  <span className="admin-profile-value">
-                    {user.user_metadata.role ?? "Administrador del Sistema"}
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="admin-profile-logout"
-                  onClick={handleLogout}
-                  disabled={isLoggingOut}
-                >
-                  <LogOut className="admin-profile-logout-icon" />
-                  {isLoggingOut ? "Cerrando..." : "Cerrar Sesion"}
-                </button>
-              </div>
-            )}
-          </div>
-        </header>
-
         <div className="admin-panels">
           <div className="admin-content-shell">
             <div className="admin-content">
