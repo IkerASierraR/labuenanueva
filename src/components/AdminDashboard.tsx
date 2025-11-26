@@ -51,14 +51,6 @@ interface NavGroup {
   modules: ModuleId[];
 }
 
-interface AuditEntry {
-  id: string;
-  module: ModuleId;
-  message: string;
-  detail?: string;
-  createdAt: string;
-}
-
 interface User {
   id: string;
   email: string;
@@ -159,20 +151,6 @@ const NAV_GROUPS: NavGroup[] = [
   }
 ];
 
-const formatTimestamp = (isoDate: string): string => {
-  try {
-    return new Intl.DateTimeFormat("es-PE", {
-      dateStyle: "medium",
-      timeStyle: "short"
-    }).format(new Date(isoDate));
-  } catch {
-    return new Date(isoDate).toLocaleString();
-  }
-};
-
-const buildAuditId = (): string =>
-  `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
   const normalizedRole = useMemo(
     () => user.user_metadata.role?.trim().toLowerCase() ?? "",
@@ -204,16 +182,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
     }
   }, [activeModule, availableModules]);
 
-  const [auditTrail, setAuditTrail] = useState<AuditEntry[]>([]);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  const moduleDictionary = useMemo(() => {
-    const dictionary: Record<ModuleId, ModuleDefinition> = {} as Record<ModuleId, ModuleDefinition>;
-    availableModules.forEach((module) => {
-      dictionary[module.id] = module;
-    });
-    return dictionary;
-  }, [availableModules]);
 
   const userInitial = useMemo(() => {
     const fallback = user.email || "A";
@@ -226,21 +195,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
     [user.user_metadata.login_type]
   );
 
-  const addAuditLog = useCallback(
-    (message: string, detail?: string) => {
-      setAuditTrail((prev) => {
-        const entry: AuditEntry = {
-          id: buildAuditId(),
-          module: activeModule,
-          message,
-          detail,
-          createdAt: new Date().toISOString()
-        };
-        return [entry, ...prev].slice(0, 20);
-      });
-    },
-    [activeModule]
-  );
+  const addAuditLog = useCallback(() => {}, []);
 
   const handleLogout = useCallback(async () => {
     if (isLoggingOut) return;
@@ -414,48 +369,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
             </div>
           </div>
 
-          <div className="admin-activity-panel">
-            <div className="admin-activity-header">
-              <div>
-                <h2 className="admin-title">Actividad reciente</h2>
-                <p className="admin-subtitle">
-                  Eventos generados por los modulos del panel
-                </p>
-              </div>
-            </div>
-
-            {auditTrail.length === 0 ? (
-              <p className="admin-activity-empty-message">
-                No hay actividad reciente.
-              </p>
-            ) : (
-              <ul className="admin-activity-list">
-                {auditTrail.map((entry) => {
-                  const moduleMeta = moduleDictionary[entry.module];
-                  return (
-                    <li key={entry.id} className="admin-activity-item">
-                      <div>
-                        <p className="admin-activity-message">{entry.message}</p>
-                        {entry.detail && (
-                          <p className="admin-activity-detail">{entry.detail}</p>
-                        )}
-                        <span className="admin-activity-time">
-                          {formatTimestamp(entry.createdAt)}
-                        </span>
-                      </div>
-                      <span
-                        className={`admin-activity-badge admin-activity-badge-${
-                          moduleMeta?.color ?? "blue"
-                        }`}
-                      >
-                        {moduleMeta?.name ?? entry.module}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </div>
         </div>
       </div>
     </div>
