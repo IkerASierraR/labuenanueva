@@ -302,9 +302,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
                   >
                     <div className="admin-group-label-stack">
                       <span className="admin-group-label">{group.label}</span>
-                      <span className="admin-group-helper">
-                        {group.modules.length} accesos directos
-                      </span>
                     </div>
                     <ChevronDown
                       className={`admin-group-icon ${isOpen ? "is-open" : ""}`}
