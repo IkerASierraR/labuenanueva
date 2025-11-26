@@ -20,14 +20,22 @@
 }
 
 .login-wrapper {
-  width: min(34rem, 92vw);
-  min-width: 24rem;
-  height: auto;
+  width: 420px;
+  max-width: 420px;
+  min-width: 420px;
+  min-height: 720px;
+  max-height: 90vh;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 1.25rem;
+  box-shadow: 0 25px 35px -10px rgba(59, 130, 246, 0.25);
+  backdrop-filter: blur(6px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
   animation: slideUpFade 0.6s ease-out;
+  overflow: hidden;
 }
 
 @keyframes slideUpFade {
@@ -222,27 +230,18 @@
   }
 
   .login-wrapper {
-    padding: 1rem 0;
+    padding: 1.25rem;
+    min-height: 640px;
     justify-content: flex-start;
     overflow-y: auto;
   }
 }
 
-@media (max-width: 768px) {
-  .login-wrapper {
-    width: min(30rem, 95vw);
-    min-width: 20rem;
-  }
-
-  .login-card {
-    padding: 1.5rem;
-  }
-}
-
 @media (max-width: 520px) {
   .login-wrapper {
-    width: 100%;
-    min-width: 100%;
+    width: min(420px, calc(100vw - 2rem));
+    min-width: min(420px, calc(100vw - 2rem));
+    max-width: min(420px, calc(100vw - 2rem));
   }
 
   .login-card {
