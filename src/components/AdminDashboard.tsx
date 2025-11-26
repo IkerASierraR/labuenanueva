@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
-  Server,
   LogOut,
   Building2,
   CalendarClock,
@@ -260,17 +259,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
       <aside
         className={`admin-sidebar ${isSidebarCollapsed ? "is-collapsed" : ""}`}
       >
-        <div className="admin-sidebar-top">
-          <div className="admin-brand">
-            <div className="admin-logo">
-              <Server className="admin-logo-icon" />
-            </div>
-            <div>
-              <h1 className="admin-title">Panel de Control Administrativo</h1>
-              <p className="admin-subtitle">IntegraUPT - Sistema de Gestion</p>
-            </div>
-          </div>
-        </div>
 
         <div className="admin-sidebar-nav-wrapper">
 
@@ -342,6 +330,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
       <div className="admin-main-stack">
         <header className="admin-header">
           <div className="admin-header-left">
+            <p className="admin-kicker">Panel principal</p>
             <button
               type="button"
               className={`admin-sidebar-toggle ${
