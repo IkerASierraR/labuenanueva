@@ -256,38 +256,21 @@
   position: absolute;
   top: calc(100% + 0.5rem);
   right: 0;
-  background: #fff;
-  color: #0f172a;
-  min-width: 260px;
-  border-radius: 0.75rem;
-  box-shadow: 0 20px 40px -18px rgba(15, 47, 122, 0.25);
-  border: 1px solid #e2e8f0;
-  padding: 0.75rem 0.75rem 0.6rem;
-  display: grid;
-  gap: 0.55rem;
+  background: transparent;
+  color: #f8fafc;
+  min-width: 220px;
+  padding-top: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
   z-index: 8;
 }
 
-.admin-profile-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding: 0.55rem 0.65rem;
-  border-radius: 0.65rem;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
-}
-
-.admin-profile-label {
+.admin-profile-role {
   font-weight: 700;
-  color: #0f172a;
-}
-
-.admin-profile-value {
-  color: #1f2937;
+  color: #cbd5e1;
   text-align: right;
-  font-weight: 600;
+  margin: 0;
 }
 
 .admin-profile-logout {
@@ -296,19 +279,19 @@
   justify-content: center;
   gap: 0.5rem;
   width: 100%;
-  border: 1px solid rgba(220, 38, 38, 0.18);
-  background: #fff1f2;
-  color: #b91c1c;
-  padding: 0.6rem 0.8rem;
-  border-radius: 0.65rem;
+  border: none;
+  background: transparent;
+  color: #ef4444;
+  padding: 0.35rem 0.2rem;
+  border-radius: 0.5rem;
   font-weight: 800;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .admin-profile-logout:hover {
-  background: #ffe4e6;
-  box-shadow: 0 10px 18px -14px rgba(185, 28, 28, 0.7);
+  background: rgba(239, 68, 68, 0.12);
+  box-shadow: none;
   transform: translateY(-1px);
 }
 

@@ -290,9 +290,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
           >
             <div className="admin-user-info">
               <p className="admin-user-name">{user.user_metadata.name}</p>
-              <p className="admin-user-role">
-                {user.user_metadata.role ?? "Administrador del Sistema"}
-              </p>
             </div>
             <div className="admin-user-avatar">
               <span className="admin-avatar-text">{userInitial}</span>
@@ -301,18 +298,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
 
           {isProfileOpen && (
             <div className="admin-profile-card" role="dialog" aria-label="Perfil">
-              <div className="admin-profile-row">
-                <span className="admin-profile-label">Nombre</span>
-                <span className="admin-profile-value">
-                  {user.user_metadata.name || user.email}
-                </span>
-              </div>
-              <div className="admin-profile-row">
-                <span className="admin-profile-label">Rol</span>
-                <span className="admin-profile-value">
-                  {user.user_metadata.role ?? "Administrador del Sistema"}
-                </span>
-              </div>
+              <p className="admin-profile-role">
+                {user.user_metadata.role ?? "Administrador del Sistema"}
+              </p>
               <button
                 type="button"
                 className="admin-profile-logout"
