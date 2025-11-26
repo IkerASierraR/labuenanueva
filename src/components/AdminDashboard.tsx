@@ -425,26 +425,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
             </div>
 
             {auditTrail.length === 0 ? (
-              <div className="admin-activity-empty-card">
-                <div className="admin-activity-empty-row">
-                  <div className="admin-activity-pulse" />
-                  <div className="admin-activity-lines">
-                    <span className="admin-activity-line short" />
-                    <span className="admin-activity-line long" />
-                  </div>
-                  <span className="admin-activity-chip">Monitoreo activo</span>
-                </div>
-
-                <div className="admin-activity-empty-row subtle">
-                  <div className="admin-activity-lines">
-                    <span className="admin-activity-line long" />
-                    <span className="admin-activity-line short" />
-                  </div>
-                  <span className="admin-activity-chip chip-muted">
-                    Esperando nuevos eventos
-                  </span>
-                </div>
-              </div>
+              <p className="admin-activity-empty-message">
+                No hay actividad reciente.
+              </p>
             ) : (
               <ul className="admin-activity-list">
                 {auditTrail.map((entry) => {
