@@ -49,10 +49,39 @@ const parseQrRoute = (): QrRouteMatch | null => {
   return null;
 };
 
+const updateWindowControls = (options: {
+  resizable?: boolean;
+  maximizable?: boolean;
+  size?: { width: number; height: number };
+}) => {
+  window.uptDesktop?.setWindowControls?.(options);
+};
+
 function App() {
   const qrRoute = useMemo(() => parseQrRoute(), []);
   const [session, setSession] = useState<BackendSession | null>(null);
   const [isInitializing, setIsInitializing] = useState(() => (qrRoute ? false : true));
+
+    useEffect(() => {
+    if (qrRoute) {
+      updateWindowControls({ resizable: true, maximizable: true });
+      return;
+    }
+
+    if (session) {
+      updateWindowControls({
+        resizable: true,
+        maximizable: true,
+        size: { width: 1200, height: 800 },
+      });
+    } else {
+      updateWindowControls({
+        resizable: false,
+        maximizable: false,
+        size: { width: 520, height: 900 },
+      });
+    }
+  }, [qrRoute, session]);
 
   // Restaurar sesión si no es QR
   useEffect(() => {
