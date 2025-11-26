@@ -179,14 +179,14 @@
 .admin-title {
   font-size: clamp(1.12rem, 2vw, 1.35rem);
   font-weight: 700;
-  color: #f8fafc;
+  color: #0f172a;
   margin: 0;
 }
 
 
 .admin-subtitle {
   font-size: clamp(0.82rem, 1.4vw, 0.95rem);
-  color: rgba(255, 255, 255, 0.78);
+  color: #0f172a;
   margin: 0;
 }
 
