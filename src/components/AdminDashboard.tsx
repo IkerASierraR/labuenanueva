@@ -191,6 +191,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
   }, [isSupervisor]);
 
   const [activeModule, setActiveModule] = useState<ModuleId>("reservas");
+  const [openGroups, setOpenGroups] = useState<Record<NavGroup["id"], boolean>>({
+    reservas: true,
+    gestiones: true,
+    reportes: true
+  });
 
   useEffect(() => {
     if (!availableModules.some((module) => module.id === activeModule)) {
@@ -281,20 +286,33 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
 
           <nav className="admin-nav">
             {NAV_GROUPS.map((group) => {
+              const isOpen = openGroups[group.id];
               return (
                 <div key={group.id} className="admin-nav-group">
-                  <div className="admin-group-button" aria-expanded>
+                  <button
+                    type="button"
+                    className="admin-group-button"
+                    aria-expanded={isOpen}
+                    onClick={() =>
+                      setOpenGroups((prev) => ({
+                        ...prev,
+                        [group.id]: !prev[group.id]
+                      }))
+                    }
+                  >
                     <div className="admin-group-label-stack">
                       <span className="admin-group-label">{group.label}</span>
                       <span className="admin-group-helper">
                         {group.modules.length} accesos directos
                       </span>
                     </div>
-                    <ChevronDown className="admin-group-icon always-open" />
-                  </div>
+                    <ChevronDown
+                      className={`admin-group-icon ${isOpen ? "is-open" : ""}`}
+                    />
+                  </button>
 
                   <div
-                    className="admin-group-items group-open"
+                    className={`admin-group-items ${isOpen ? "group-open" : "group-closed"}`}
                   >
                     {group.modules
                       .filter((moduleId) =>
@@ -348,7 +366,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
             <div>
               <p className="admin-kicker">Panel principal</p>
               <p className="admin-header-helper">IntegraUPT - Sistema de Gestion</p>
-              <p className="admin-subtitle">IntegraUPT - Sistema de Gestion</p>
             </div>
           </div>
 
