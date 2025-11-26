@@ -203,6 +203,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
     [user.user_metadata.login_type]
   );
 
+  const displayRole = useMemo(() => {
+    const rawRole = user.user_metadata.role?.trim();
+    if (!rawRole) return "Administrador";
+    return rawRole.charAt(0).toUpperCase() + rawRole.slice(1);
+  }, [user.user_metadata.role]);
+
   const addAuditLog = useCallback(() => {}, []);
 
   const handleLogout = useCallback(async () => {
@@ -298,18 +304,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
 
           {isProfileOpen && (
             <div className="admin-profile-card" role="dialog" aria-label="Perfil">
-              <p className="admin-profile-role">
-                {user.user_metadata.role ?? "Administrador del Sistema"}
-              </p>
-              <button
-                type="button"
-                className="admin-profile-logout"
-                onClick={handleLogout}
-                disabled={isLoggingOut}
-              >
-                <LogOut className="admin-profile-logout-icon" />
-                {isLoggingOut ? "Cerrando..." : "Cerrar Sesion"}
-              </button>
+              <div className="admin-profile-surface">
+                <div className="admin-profile-overview">
+                  <div className="admin-profile-avatar-large" aria-hidden>
+                    <span className="admin-avatar-text">{userInitial}</span>
+                  </div>
+
+                  <div className="admin-profile-text">
+                    <p className="admin-profile-name">{user.user_metadata.name}</p>
+                    {user.email ? (
+                      <p className="admin-profile-email">{user.email}</p>
+                    ) : null}
+                    <p className="admin-profile-role">Rol: {displayRole}</p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  className="admin-profile-logout"
+                  onClick={handleLogout}
+                  disabled={isLoggingOut}
+                >
+                  <LogOut className="admin-profile-logout-icon" />
+                  {isLoggingOut ? "Cerrando..." : "Cerrar Sesion"}
+                </button>
+              </div>
             </div>
           )}
         </div>
