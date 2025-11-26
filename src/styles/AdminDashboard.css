@@ -1,9 +1,10 @@
 
 .admin-dashboard {
+  --admin-sidebar-width: clamp(220px, 20vw, 260px);
   min-height: 100vh;
   height: 100vh;
   display: grid;
-  grid-template-columns: clamp(220px, 20vw, 260px) 1fr;
+  grid-template-columns: var(--admin-sidebar-width) 1fr;
   align-items: stretch;
   background: linear-gradient(135deg, #0f2f7a 0%, #0a245e 12%, #eef2ff 12%, #e2e8f0 100%);
   overflow-x: auto;
@@ -12,8 +13,12 @@
 
 @media (max-width: 1100px) {
   .admin-dashboard {
-    grid-template-columns: clamp(210px, 26vw, 260px) 1fr;
+    --admin-sidebar-width: clamp(210px, 26vw, 260px);
   }
+}
+
+.admin-dashboard.is-sidebar-collapsed {
+  grid-template-columns: 0px 1fr;
 }
 
 @media (max-width: 820px) {
@@ -67,6 +72,53 @@
   border-radius: 0;
   margin-bottom: 0.25rem;
   box-shadow: 0 10px 25px -18px rgba(0, 0, 0, 0.6);
+}
+
+.admin-sidebar-toggle {
+  appearance: none;
+  border: none;
+  background: linear-gradient(145deg, #9ca3af 0%, #6b7280 100%);
+  border-radius: 999px;
+  width: 2.55rem;
+  height: 2.55rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  cursor: pointer;
+  box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.45);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.admin-sidebar-toggle-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.admin-sidebar-toggle-icon span {
+  display: block;
+  width: 1.05rem;
+  height: 0.28rem;
+  background: #f8fafc;
+  border-radius: 999px;
+}
+
+.admin-sidebar-toggle:hover,
+.admin-sidebar-toggle:focus-visible {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px -10px rgba(0, 0, 0, 0.55);
+  background: linear-gradient(145deg, #a3aab3 0%, #707888 100%);
+}
+
+.admin-sidebar-toggle.is-collapsed {
+  background: linear-gradient(145deg, #4b5563 0%, #374151 100%);
+}
+
+.admin-sidebar-toggle:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 20px -12px rgba(0, 0, 0, 0.6);
 }
 
 .admin-header-left {
@@ -273,6 +325,13 @@
   overflow: hidden;
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
   scrollbar-width: thin;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+}
+
+.admin-sidebar.is-collapsed {
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .admin-sidebar::-webkit-scrollbar {

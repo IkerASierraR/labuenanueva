@@ -191,6 +191,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
   }, [activeModule, availableModules]);
 
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   const userInitial = useMemo(() => {
     const fallback = user.email || "A";
@@ -251,8 +252,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
   }, []);
 
   return (
-    <div className="admin-dashboard">
-      <aside className="admin-sidebar">
+    <div
+      className={`admin-dashboard ${
+        isSidebarCollapsed ? "is-sidebar-collapsed" : ""
+      }`}
+    >
+      <aside
+        className={`admin-sidebar ${isSidebarCollapsed ? "is-collapsed" : ""}`}
+      >
         <div className="admin-sidebar-top">
           <div className="admin-brand">
             <div className="admin-logo">
@@ -335,6 +342,20 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
       <div className="admin-main-stack">
         <header className="admin-header">
           <div className="admin-header-left">
+            <button
+              type="button"
+              className={`admin-sidebar-toggle ${
+                isSidebarCollapsed ? "is-collapsed" : ""
+              }`}
+              onClick={() => setIsSidebarCollapsed((prev) => !prev)}
+              aria-pressed={isSidebarCollapsed}
+              aria-label="Alternar menu lateral"
+            >
+              <span className="admin-sidebar-toggle-icon">
+                <span />
+                <span />
+              </span>
+            </button>
             <div>
               <p className="admin-kicker">Panel principal</p>
               <p className="admin-header-helper">IntegraUPT - Sistema de Gestion</p>
