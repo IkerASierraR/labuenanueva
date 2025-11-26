@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   Server,
@@ -174,6 +180,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
     gestiones: true,
     reportes: true
   });
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const profileRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!availableModules.some((module) => module.id === activeModule)) {
@@ -215,6 +223,32 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
       window.location.reload();
     }
   }, [isLoggingOut, shouldNotifyBackend, user.id, user.sessionToken]);
+
+    useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        profileRef.current &&
+        event.target instanceof Node &&
+        !profileRef.current.contains(event.target)
+      ) {
+        setIsProfileOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsProfileOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keyup", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keyup", handleEscape);
+    };
+  }, []);
 
   return (
     <div className="admin-dashboard">
@@ -302,14 +336,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
           </nav>
         </div>
 
-        <button
-          onClick={handleLogout}
-          className="admin-sidebar-logout"
-          disabled={isLoggingOut}
-        >
-          <LogOut className="admin-logout-icon" />
-          {isLoggingOut ? "Cerrando..." : "Cerrar Sesion"}
-        </button>
       </aside>
 
       <div className="admin-main-stack">
@@ -321,16 +347,52 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
             </div>
           </div>
 
-          <div className="admin-header-right">
-            <div className="admin-user-info">
-              <p className="admin-user-name">{user.user_metadata.name}</p>
-              <p className="admin-user-role">
-                {user.user_metadata.role ?? "Administrador del Sistema"}
-              </p>
-            </div>
-            <div className="admin-user-avatar">
-              <span className="admin-avatar-text">{userInitial}</span>
-            </div>
+         <div className="admin-header-right" ref={profileRef}>
+            <button
+              type="button"
+              className={`admin-profile-trigger ${
+                isProfileOpen ? "is-open" : ""
+              }`}
+              onClick={() => setIsProfileOpen((prev) => !prev)}
+              aria-expanded={isProfileOpen}
+              aria-haspopup="true"
+            >
+              <div className="admin-user-info">
+                <p className="admin-user-name">{user.user_metadata.name}</p>
+                <p className="admin-user-role">
+                  {user.user_metadata.role ?? "Administrador del Sistema"}
+                </p>
+              </div>
+              <div className="admin-user-avatar">
+                <span className="admin-avatar-text">{userInitial}</span>
+              </div>
+            </button>
+
+            {isProfileOpen && (
+              <div className="admin-profile-card" role="dialog" aria-label="Perfil">
+                <div className="admin-profile-row">
+                  <span className="admin-profile-label">Nombre</span>
+                  <span className="admin-profile-value">
+                    {user.user_metadata.name || user.email}
+                  </span>
+                </div>
+                <div className="admin-profile-row">
+                  <span className="admin-profile-label">Rol</span>
+                  <span className="admin-profile-value">
+                    {user.user_metadata.role ?? "Administrador del Sistema"}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  className="admin-profile-logout"
+                  onClick={handleLogout}
+                  disabled={isLoggingOut}
+                >
+                  <LogOut className="admin-profile-logout-icon" />
+                  {isLoggingOut ? "Cerrando..." : "Cerrar Sesion"}
+                </button>
+              </div>
+            )}
           </div>
         </header>
 
