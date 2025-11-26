@@ -76,14 +76,14 @@ interface AdminDashboardProps {
 const MODULES: ModuleDefinition[] = [
   {
     id: "labs",
-    name: "Gestion de Espacios",
+    name: "Espacios",
     description: "Administra aulas, laboratorios y ambientes especiales",
     icon: Building2,
     color: "blue"
   },
   {
     id: "schedules",
-    name: "Gestion de Horarios",
+    name: "Horarios",
     description: "Configura turnos y tiempos por cada escuela",
     icon: CalendarClock,
     color: "green"
@@ -104,7 +104,7 @@ const MODULES: ModuleDefinition[] = [
   },
   {
     id: "users",
-    name: "Usuarios",
+    name: "Usuario",
     description: "Define responsables y permisos del sistema",
     icon: UsersRound,
     color: "purple"
